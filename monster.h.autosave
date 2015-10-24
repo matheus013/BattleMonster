@@ -1,0 +1,17 @@
+#ifndef MONSTER_H
+#define MONSTER_H
+#include <QObject>
+#include <QVector>
+
+class Monster : public QObject{
+    Q_OBJECT
+    QArrayData arr;
+public:
+    explicit Monster(QObject *parent = 0);
+
+signals:
+
+public slots:
+};
+
+#endif // MONSTER_H
