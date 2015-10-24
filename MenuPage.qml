@@ -7,6 +7,9 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         id: name
         text: qsTr(ui.title)
+        font{
+            pixelSize: 30
+        }
     }
     ColumnLayout{
         anchors.horizontalCenter: parent.horizontalCenter

@@ -1,6 +1,6 @@
-#include "datacreate.h"
+//#include "datacreate.h"
 
-DataCreate::DataCreate() {
+//DataCreate::DataCreate() {
 
-}
+//}
 

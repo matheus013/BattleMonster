@@ -1,9 +1,9 @@
-#pragma once
-#include <QObject>
+//#pragma once
+//#include <QObject>
 
-class Treiner : public QObject{
-    Q_OBJECT
-public:
-    Treiner();
+//class Treiner : public QObject{
+//    Q_OBJECT
+//public:
+//    Treiner();
 
-};
+//};

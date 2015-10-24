@@ -1,4 +1,4 @@
-#include "treiner.hpp"
+//#include "treiner.hpp"
 
-Treiner::Treiner(){}
+//Treiner::Treiner(){}
 
