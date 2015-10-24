@@ -4,11 +4,11 @@ QT += qml quick
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    treiner.cpp \
     skill.cpp \
     monster.cpp \
     gamedata.cpp \
-    datacreate.cpp
+    datacreate.cpp \
+    trainer.cpp
 
 RESOURCES += qml.qrc
 
@@ -19,10 +19,10 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    treiner.hpp \
     skill.hpp \
     monster.hpp \
     enum.h \
     gamedata.h \
-    datacreate.h
+    datacreate.h \
+    trainer.h
 

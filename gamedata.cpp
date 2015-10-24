@@ -12,7 +12,7 @@ void GameData::newSkill(QString name, int power, int accuracy, Type type){
     skill.setProperty("power",power);
     skill.setProperty("accuracy",accuracy);
     //m_skillData.append(skill);
-    saveSkill();
+    //saveSkill();
 
 }
 
@@ -45,46 +45,10 @@ void GameData::saveMonster(QString path){
 
 }
 
-void GameData::loadTreiner(QString dir){
+void GameData::loadTrainer(QString dir){
 
 }
 
 void GameData::saveTrainer(QString dir){
 
 }
-
-Treiner GameData::player() const{
-    return m_player;
-}
-
-QList<Monster> GameData::dataMonster() const
-{
-    return m_dataMonster;
-}
-
-QList<Skill> GameData::dataSkill() const
-{
-    return m_dataSkill;
-}
-
-void GameData::setPlayer(Treiner player){
-    m_player = player;
-    emit playerChanged(player);
-}
-
-void GameData::setDataMonster(QList<Monster> dataMonster){
-    if (m_dataMonster == dataMonster)
-        return;
-
-    m_dataMonster = dataMonster;
-    emit dataMonsterChanged(dataMonster);
-}
-
-void GameData::setDataSkill(QList<Skill> dataSkill){
-    if (m_dataSkill == dataSkill)
-        return;
-
-    m_dataSkill = dataSkill;
-    emit dataSkillChanged(dataSkill);
-}
-

@@ -3,18 +3,21 @@
 #include <QObject>
 #include <QList>
 #include "monster.hpp"
-#include "treiner.hpp"
+#include "trainer.h"
 #include "skill.hpp"
 
 
 class GameData : public QObject{
     Q_OBJECT
-    Q_PROPERTY(QList<Skill> dataSkill READ dataSkill WRITE setDataSkill NOTIFY dataSkillChanged)
-    Q_PROPERTY(QList<Monster> dataMonster READ dataMonster WRITE setDataMonster NOTIFY dataMonsterChanged)
-    Q_PROPERTY(Treiner player READ player WRITE setPlayer NOTIFY playerChanged)
-    Treiner m_player;
-    QList<Monster> m_dataMonster;
-    QList<Skill> m_dataSkill;
+    Q_PROPERTY(QList<Skill *> dataSkill READ dataSkill WRITE setDataSkill NOTIFY dataSkillChanged)
+    Q_PROPERTY(QList<Monster *> dataMonster READ dataMonster WRITE setDataMonster NOTIFY dataMonsterChanged)
+    Q_PROPERTY(Trainer * player READ player WRITE setPlayer NOTIFY playerChanged)
+
+    QList<Monster *> m_dataMonster;
+
+    QList<Skill *> m_dataSkill;
+
+    Trainer * m_player;
 
 public:
     GameData();
@@ -28,19 +31,53 @@ public:
     void loadMonster(QString path = "data/json/monster.json");
     void saveMonster(QString path = "data/json/monster.json");
 
-    void loadTreiner(QString dir = "data/player");
+    void loadTrainer(QString dir = "data/player");
     void saveTrainer(QString dir = "data/player");
 
-    Treiner player() const;
-    QList<Monster> dataMonster() const;
-    QList<Skill> dataSkill() const;
+    QList<Skill *> dataSkill() const
+    {
+        return m_dataSkill;
+    }
+    QList<Monster *> dataMonster() const
+    {
+        return m_dataMonster;
+    }
 
-    void setPlayer(Treiner player);
-    void setDataMonster(QList<Monster> dataMonster);
-    void setDataSkill(QList<Skill> dataSkill);
+    Trainer * player() const
+    {
+        return m_player;
+    }
+
+public slots:
+    void setDataSkill(QList<Skill *> dataSkill)
+    {
+        if (m_dataSkill == dataSkill)
+            return;
+
+        m_dataSkill = dataSkill;
+        emit dataSkillChanged(dataSkill);
+    }
+
+    void setDataMonster(QList<Monster *> dataMonster)
+    {
+        if (m_dataMonster == dataMonster)
+            return;
+
+        m_dataMonster = dataMonster;
+        emit dataMonsterChanged(dataMonster);
+    }
+
+    void setPlayer(Trainer * player)
+    {
+        if (m_player == player)
+            return;
+
+        m_player = player;
+        emit playerChanged(player);
+    }
 
 signals:
-    void playerChanged(Treiner player);
-    void dataMonsterChanged(QList<Monster> dataMonster);
-    void dataSkillChanged(QList<Skill> dataSkill);
+    void dataSkillChanged(QList<Skill *> dataSkill);
+    void dataMonsterChanged(QList<Monster *> dataMonster);
+    void playerChanged(Trainer * player);
 };
