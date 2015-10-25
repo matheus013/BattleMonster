@@ -8,7 +8,8 @@ SOURCES += main.cpp \
     monster.cpp \
     gamedata.cpp \
     datacreate.cpp \
-    trainer.cpp
+    trainer.cpp \
+    battle.cpp
 
 RESOURCES += qml.qrc \
     images.qrc
@@ -25,7 +26,8 @@ HEADERS += \
     enum.h \
     gamedata.h \
     datacreate.h \
-    trainer.h
+    trainer.h \
+    battle.h
 
 DISTFILES +=
 

@@ -1,35 +1,29 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-Rectangle {
-    id: battleBackground
-    height: parent.height
-    width: parent.width*0.60
-    anchors.horizontalCenter: parent.horizontalCenter
-    function getColor() {
-        var letters = '0123456789ABCDEF'.split('');
-        var color = '#';
-        for (var i = 0; i < 6; i++ ) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
+import QtQuick.Controls 1.4
+Item {
+
     Image {
-        //anchors.fill: battleBackground
+        id: battleBackground
+        height: parent.height
+        width: parent.width*0.70
+        anchors.horizontalCenter: parent.horizontalCenter
         source: "qrc:/../build-BattleMonster/data/images/background-battle.png"
-    }
-    GridLayout{
-        rows: 2
-        columns: 3
-        ListView{
+        GridLayout{
+            ProgressBar{
+                id: enemyBar
+                maximumValue: 100
+                value:10
+            }ProgressBar{
+                id: myBar
+                maximumValue: 100
+                value:10
+            }
+            Rectangle{
+            }
 
-        }
-
-        Rectangle{
-            width: parent.width*0.2
-            height: parent.height*0.3
-            color: getColor()
-            MouseArea{
-                anchors.fill: parent
+            Button{
+                text: "back"
                 onClicked: stackPages.pop()
             }
         }
