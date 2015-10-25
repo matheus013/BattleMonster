@@ -30,6 +30,12 @@ Window {
             height: ui.height*0.25
             width: ui.width*0.2
             color: "black"
+            GridLayout{
+                Button{
+                    text: "Make data monster"
+                    onClicked: _make.buildMonster()
+                }
+            }
         }
     }
 

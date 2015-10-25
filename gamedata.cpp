@@ -3,6 +3,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QDebug>
 GameData::GameData(){}
 
 void GameData::newSkill(QString name, int power, int accuracy, Type type){
@@ -20,7 +21,8 @@ void GameData::newMonster(QString name, int attack, int mAttack, int defense, in
 }
 
 void GameData::newTrainer(QString name, QString sex, int monsterId){
-
+    m_player = new Trainer(name,sex,monsterId);
+    saveTrainer();
 }
 
 void GameData::loadSkill(QString path){
@@ -30,16 +32,23 @@ void GameData::loadSkill(QString path){
         doc = QJsonDocument::fromJson(in.readAll());
         QJsonArray json = doc.array();
         for (int var = 0; var < json.size(); ++var){
-            //            if(QJsonDocument(json.at(var)).isObject()){
-            //                Skill aux(QJsonDocument(json.at(var)).object());
-            //                skillData.insert(QJsonDocument(json.at(var)).object().value("name"),aux);
-            //            }
+            Skill *aux = new Skill(json.at(var).toObject());
+            m_dataSkill.append(aux);
         }
     }
 }
 
 void GameData::loadMonster(QString path){
-
+    QFile read(path);
+    QJsonDocument doc;
+    if(read.open(QIODevice::ReadOnly)){
+        doc = QJsonDocument::fromJson(read.readAll());
+        QJsonArray json = doc.array();
+        for (int var = 0; var < json.size(); ++var) {
+            Monster* monster = new Monster(json.at(var).toObject());
+            m_dataMonster.append(monster);
+        }
+    }
 }
 
 void GameData::saveMonster(QString path){
@@ -48,18 +57,41 @@ void GameData::saveMonster(QString path){
         json.append(m_dataMonster.at(var)->toJson());
     }
     QJsonDocument dataDoc(json);
+    qDebug() << path;
     QFile out(path);
-    if(out.open(QIODevice::WriteOnly)){
+    if(out.open(QIODevice::WriteOnly | QIODevice::Text)){
         out.write(dataDoc.toJson());
+    }else{
+        qDebug() << Q_FUNC_INFO << "error";
     }
 }
 
-void GameData::loadTrainer(QString dir){
+void GameData::loadTrainer(QString path){
 
 }
 
-void GameData::saveTrainer(QString dir){
+void GameData::saveTrainer(QString path){
+    QFile out(path);
+    QJsonObject json;
+    QJsonArray list;
+    json.insert("name",m_player->name());
+    json.insert("sex",m_player->sex());
+    for (int var = 0; var < m_player->team().size(); ++var) {
+        QJsonObject aux;
+        aux.insert("id",m_player->team().at(var)->name());
+        aux.insert("level",m_player->team().at(var)->level());
+        list.append(aux);
+    }
+    json.insert("monsterList",list);
+    QJsonDocument doc(json);
+    if(out.open(QIODevice::WriteOnly)){
+        out.write(doc.toJson());
+    }
 
+}
+
+Monster *GameData::atMonster(int id) const{
+    return dataMonster().at(id);
 }
 
 QList<Skill *> GameData::dataSkill() const

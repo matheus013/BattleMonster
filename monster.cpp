@@ -12,6 +12,17 @@ Monster::Monster(QString name, int attack, int mAttack, int defense, int mDefens
 
 }
 
+Monster::Monster(QJsonObject json){
+    m_name = json.value("name").toString();
+    m_attack = json.value("attack").toInt();
+    m_mAttack = json.value("mAttack").toInt();
+    m_defense = json.value("defense").toInt();
+    m_mDefense = json.value("mDefense").toInt();
+    m_speed = json.value("speed").toInt();
+    m_hp = json.value("hp").toInt();
+
+}
+
 void Monster::levelUp(){
     m_level++;
 }
@@ -19,12 +30,12 @@ void Monster::levelUp(){
 QString Monster::toJson(){
     QJsonObject json;
     json.insert("name",name());
-    json.insert("attack",attack());
+    json.insert("attack",m_attack);
     json.insert("mAttack",m_mAttack);
-    json.insert("defense",defense());
+    json.insert("defense",m_defense);
     json.insert("mDefense",m_mDefense);
-    json.insert("speed",speed());
-    json.insert("hp",hp());
+    json.insert("speed",m_speed);
+    json.insert("hp",m_hp);
     //    if(json.value("type") == m_type)
     //        qDebug() << Q_FUNC_INFO << "enum: ok";
     return QJsonDocument(json).toJson();

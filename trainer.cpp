@@ -1,8 +1,17 @@
 #include "trainer.h"
 #include <QJsonObject>
+#include "gamedata.h"
 
 Trainer::Trainer(QJsonObject json){
 
+}
+
+Trainer::Trainer(QString name, QString sex, int initial){
+    m_name = name;
+    m_sex = sex;
+    GameData data;
+    data.loadMonster();
+    m_team.append(data.atMonster(initial));
 }
 
 QString Trainer::sex() const

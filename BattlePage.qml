@@ -1,6 +1,10 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-Item {
+Rectangle {
+    id: battleBackground
+    height: parent.height
+    width: parent.width*0.60
+    anchors.horizontalCenter: parent.horizontalCenter
     function getColor() {
         var letters = '0123456789ABCDEF'.split('');
         var color = '#';
@@ -10,10 +14,7 @@ Item {
         return color;
     }
     Image {
-        id: battleBackground
-        height: parent.height
-        width: parent.width*0.60
-        anchors.horizontalCenter: parent.horizontalCenter
+        //anchors.fill: battleBackground
         source: "qrc:/../build-BattleMonster/data/images/background-battle.png"
     }
     GridLayout{
