@@ -1,46 +1,83 @@
-//#pragma once
-//#include <QVariant>
-//#include <QObject>
-//#include <QList>
-//#include "monster.hpp"
-//#include "treiner.hpp"
-//#include "skill.hpp"
+#pragma once
+#include <QVariant>
+#include <QObject>
+#include <QList>
+#include "monster.hpp"
+#include "trainer.h"
+#include "skill.hpp"
 
 
-//class GameData : public QObject{
-//    Q_OBJECT
-//    Q_PROPERTY(QList<Skill> dataSkill READ dataSkill WRITE setDataSkill NOTIFY dataSkillChanged)
-//    Q_PROPERTY(QList<Monster> dataMonster READ dataMonster WRITE setDataMonster NOTIFY dataMonsterChanged)
-//    Q_PROPERTY(Treiner player READ player WRITE setPlayer NOTIFY playerChanged)
-//    Treiner m_player;
-//    QList<Monster> m_dataMonster;
-//    QList<Skill> m_dataSkill;
+class GameData : public QObject{
+    Q_OBJECT
+    Q_PROPERTY(QList<Skill *> dataSkill READ dataSkill WRITE setDataSkill NOTIFY dataSkillChanged)
+    Q_PROPERTY(QList<Monster *> dataMonster READ dataMonster WRITE setDataMonster NOTIFY dataMonsterChanged)
+    Q_PROPERTY(Trainer * player READ player WRITE setPlayer NOTIFY playerChanged)
 
-//public:
-//    GameData();
+    QList<Monster *> m_dataMonster;
 
-//    void newSkill(QString name, int power, int accuracy, Type type);
-//    void newMonster(QString name,int attack,int mAttack, int defense,int mDefense,int speed,int hp);
+    QList<Skill *> m_dataSkill;
 
-//    void loadSkill(QString path = "data/json/skill.json");
-//    void saveSkill(QString path = "data/json/skill.json");
+    Trainer * m_player;
 
-//    void loadMonster(QString path = "data/json/monster.json");
-//    void saveMonster(QString path = "data/json/monster.json");
+public:
+    GameData();
 
-//    void loadTreiner(QString dir = "data/player");
-//    void saveTrainer(QString dir = "data/player");
+    void newSkill(QString name, int power, int accuracy, Type type);
+    void newMonster(QString name,int attack,int mAttack, int defense,int mDefense,int speed,int hp);
 
-//    Treiner player() const;
-//    QList<Monster> dataMonster() const;
-//    QList<Skill> dataSkill() const;
+    void loadSkill(QString path = "data/json/skill.json");
+    void saveSkill(QString path = "data/json/skill.json");
 
-//    void setPlayer(Treiner player);
-//    void setDataMonster(QList<Monster> dataMonster);
-//    void setDataSkill(QList<Skill> dataSkill);
+    void loadMonster(QString path = "data/json/monster.json");
+    void saveMonster(QString path = "data/json/monster.json");
 
-//signals:
-//    void playerChanged(Treiner player);
-//    void dataMonsterChanged(QList<Monster> dataMonster);
-//    void dataSkillChanged(QList<Skill> dataSkill);
-//};
+    void loadTrainer(QString dir = "data/player");
+    void saveTrainer(QString dir = "data/player");
+
+    QList<Skill *> dataSkill() const
+    {
+        return m_dataSkill;
+    }
+    QList<Monster *> dataMonster() const
+    {
+        return m_dataMonster;
+    }
+
+    Trainer * player() const
+    {
+        return m_player;
+    }
+
+public slots:
+    void setDataSkill(QList<Skill *> dataSkill)
+    {
+        if (m_dataSkill == dataSkill)
+            return;
+
+        m_dataSkill = dataSkill;
+        emit dataSkillChanged(dataSkill);
+    }
+
+    void setDataMonster(QList<Monster *> dataMonster)
+    {
+        if (m_dataMonster == dataMonster)
+            return;
+
+        m_dataMonster = dataMonster;
+        emit dataMonsterChanged(dataMonster);
+    }
+
+    void setPlayer(Trainer * player)
+    {
+        if (m_player == player)
+            return;
+
+        m_player = player;
+        emit playerChanged(player);
+    }
+
+signals:
+    void dataSkillChanged(QList<Skill *> dataSkill);
+    void dataMonsterChanged(QList<Monster *> dataMonster);
+    void playerChanged(Trainer * player);
+};

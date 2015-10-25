@@ -1,6 +1,14 @@
-//#include "datacreate.h"
+#include "datacreate.h"
 
-//DataCreate::DataCreate() {
+DataCreate::DataCreate() {
 
-//}
+}
+
+void DataCreate::buildMonster(){
+
+}
+
+int DataCreate::room(int a, int b){
+    return rand()%b + a;
+}
 

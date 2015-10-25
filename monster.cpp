@@ -1,97 +1,104 @@
-//#include "monster.hpp"
+#include "monster.hpp"
 
-//Monster::Monster(QString name, int attack, int mAttack, int defense, int mDefense, int speed, int hp){
-//    m_attack = attack;
-//    m_name = name;
-//    m_defense = defense;
-//    m_mAttack = mAttack;
-//    m_mDefense = mDefense;
-//    m_speed = speed;
-//    m_hp = hp;
+Monster::Monster(QString name, int attack, int mAttack, int defense, int mDefense, int speed, int hp){
+    m_attack = attack;
+    m_name = name;
+    m_defense = defense;
+    m_mAttack = mAttack;
+    m_mDefense = mDefense;
+    m_speed = speed;
+    m_hp = hp;
 
-//}
+}
 
-//QString Monster::name() const{
-//    return m_name;
-//}
+QString Monster::toJson(){
+    QJsonObject json;
+    json.insert("name",name());
+    json.insert("attack",attack());
+    json.insert("mAttack",mAttack());
+    json.insert("defense",mDefense());
 
-//void Monster::setName(QString name){
-//    if (m_name == name)
-//        return;
+            //    if(json.value("type") == m_type)
+            //        qDebug() << Q_FUNC_INFO << "enum: ok";
+            return QJsonDocument(json).toJson();
 
-//    m_name = name;
-//    emit nameChanged(name);
-//}
+}
 
-//int Monster::attack() const{
-//    return m_attack;
-//}
+QString Monster::name() const{
+    return m_name;
+}
 
-//int Monster::mAttack() const{
-//    return m_mAttack;
-//}
+void Monster::setName(QString name){
+    if (m_name == name)
+        return;
 
-//int Monster::defense() const{
-//    return m_defense;
-//}
+    m_name = name;
+    emit nameChanged(name);
+}
 
-//int Monster::mDefense() const{
-//    return m_mDefense;
-//}
+int Monster::attack() const{
+    return m_attack;
+}
 
-//int Monster::speed() const{
-//    return m_speed;
-//}
 
-//int Monster::hp() const{
-//    return m_hp;
-//}
 
-//void Monster::setAttack(int attack){
-//    if (m_attack == attack)
-//        return;
+int Monster::defense() const{
+    return m_defense;
+}
 
-//    m_attack = attack;
-//    emit attackChanged(attack);
-//}
+int Monster::speed() const{
+    return m_speed;
+}
 
-//void Monster::setMAttack(int mAttack){
-//    if (m_mAttack == mAttack)
-//        return;
+int Monster::hp() const{
+    return m_hp;
+}
 
-//    m_mAttack = mAttack;
-//    emit mAttackChanged(mAttack);
-//}
+void Monster::setAttack(int attack){
+    if (m_attack == attack)
+        return;
 
-//void Monster::setDefense(int defense){
-//    if (m_defense == defense)
-//        return;
+    m_attack = attack;
+    emit attackChanged(attack);
+}
 
-//    m_defense = defense;
-//    emit defenseChanged(defense);
-//}
+void Monster::setMAttack(int mAttack){
+    if (m_mAttack == mAttack)
+        return;
 
-//void Monster::setMDefense(int mDefense){
-//    if (m_mDefense == mDefense)
-//        return;
+    m_mAttack = mAttack;
+    emit mAttackChanged(mAttack);
+}
 
-//    m_mDefense = mDefense;
-//    emit mDefenseChanged(mDefense);
-//}
+void Monster::setDefense(int defense){
+    if (m_defense == defense)
+        return;
 
-//void Monster::setSpeed(int speed){
-//    if (m_speed == speed)
-//        return;
+    m_defense = defense;
+    emit defenseChanged(defense);
+}
 
-//    m_speed = speed;
-//    emit speedChanged(speed);
-//}
+void Monster::setMDefense(int mDefense){
+    if (m_mDefense == mDefense)
+        return;
 
-//void Monster::setHp(int hp){
-//    if (m_hp == hp)
-//        return;
+    m_mDefense = mDefense;
+    emit mDefenseChanged(mDefense);
+}
 
-//    m_hp = hp;
-//    emit hpChanged(hp);
-//}
+void Monster::setSpeed(int speed){
+    if (m_speed == speed)
+        return;
+
+    m_speed = speed;
+    emit speedChanged(speed);
+}
+
+void Monster::setHp(int hp){
+    if (m_hp == hp)
+        return;
+
+    m_hp = hp;
+    emit hpChanged(hp);
+}
 
