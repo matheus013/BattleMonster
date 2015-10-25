@@ -23,13 +23,10 @@ public:
     void newSkill(QString name, int power, int accuracy, Type type);
     void newMonster(QString name,int attack,int mAttack, int defense,int mDefense,int speed,int hp);
     Q_INVOKABLE void newTrainer(QString name,QString sex,int monsterId);
-
     void loadSkill(QString path = "/home/matheus/build-BattleMonster/data/json/skill.json");
     void saveSkill(QString path = "/home/matheus/build-BattleMonster/data/json/skill.json");
-
     void loadMonster(QString path = "/home/matheus/build-BattleMonster/data/json/monster.json");
     void saveMonster(QString path = "/home/matheus/build-BattleMonster/data/json/monster.json");
-
     void loadTrainer(QString path = "/home/matheus/build-BattleMonster/data/player/player.json");
     void saveTrainer(QString path = "/home/matheus/build-BattleMonster/data/player/player.json");
 

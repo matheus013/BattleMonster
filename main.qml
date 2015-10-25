@@ -3,6 +3,13 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 Window {
+    function getSprite(num){
+        return ":/../build-BattleMonster/data/images/sprite/" + num + ".png"
+    }
+    function getSpriteBack(num){
+        return ":/../build-BattleMonster/data/images/sprite/back/" + num + ".png"
+    }
+
     function cm(value){
         return value*10*Screen.pixelDensity
     }
@@ -28,12 +35,16 @@ Window {
             id: admin
             visible: false
             height: ui.height*0.25
-            width: ui.width*0.2
+            width: ui.width*0.15
             color: "black"
-            GridLayout{
+            ColumnLayout{
                 Button{
                     text: "Make data monster"
                     onClicked: _make.buildMonster()
+                }
+                Button{
+                    text: "Next Monster"
+                    onClicked: _battle.nextEnemy(5)
                 }
             }
         }

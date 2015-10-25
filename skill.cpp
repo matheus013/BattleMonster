@@ -14,7 +14,7 @@ Skill::Skill(QJsonObject json){
     m_power = json.value("power").toInt();
 }
 
-QString Skill::toJson(){
+QJsonObject Skill::toJson(){
     QJsonObject json;
     json.insert("name",QVariant(m_name).toString());
     json.insert("power",QVariant(m_power).toInt());
@@ -22,7 +22,7 @@ QString Skill::toJson(){
     json.insert("type",m_type);
     //    if(json.value("type") == m_type)
     //        qDebug() << Q_FUNC_INFO << "enum: ok";
-    return QJsonDocument(json).toJson();
+    return json;
 }
 
 QString Skill::name() const {

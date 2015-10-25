@@ -14,7 +14,7 @@ class Monster : public QObject{
     Q_PROPERTY(int speed READ speed WRITE setSpeed NOTIFY speedChanged)
     Q_PROPERTY(int hp READ hp WRITE setHp NOTIFY hpChanged)
     Q_PROPERTY(int level READ level WRITE setLevel NOTIFY levelChanged)
-    //Q_PROPERTY(QList<*Skill> skills READ skills WRITE setSkills NOTIFY skillsChanged)
+    //Q_PROPERTY(QList<*Skill> skill READ skill WRITE setSkill NOTIFY skillChanged)
 
     QString m_name;
     int m_attack;
@@ -23,15 +23,13 @@ class Monster : public QObject{
     int m_mDefense;
     int m_speed;
     int m_hp;
-    //QList<*Skill> m_skills;
-
     int m_level = 1;
 
 public:
     Monster(QString name,int attack,int mAttack, int defense,int mDefense,int speed,int hp);
     Monster(QJsonObject json);
     void levelUp();
-    QString toJson();
+    QJsonObject toJson();
     QString name() const;
     void setName(QString name);
     int attack() const;
@@ -46,8 +44,6 @@ public:
     void setMDefense(int mDefense);
     void setSpeed(int speed);
     void setHp(int hp);
-    //QList<*Skill> skills() const;
-    //void setSkills(QList<*Skill> skills);
     int level() const;
     void setLevel(int level);
 
@@ -59,6 +55,5 @@ signals:
     void mDefenseChanged(int mDefense);
     void speedChanged(int speed);
     void hpChanged(int hp);
-    //void skillsChanged(QList<*Skill> skills);
     void levelChanged(int level);
 };

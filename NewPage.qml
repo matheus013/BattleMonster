@@ -10,7 +10,7 @@ Item {
     property int choose: 0
     property string sex: ""
     function randomMonster(){
-        return Math.floor(Math.random() * 82);
+        return Math.floor(Math.random() * 98);
     }
     height: parent.height
     width: parent.width*0.6
@@ -61,18 +61,18 @@ Item {
             columns: 3
             rows: 2
             Image {
-                source: ":/../build-BattleMonster/data/images/sprite/" + monster_1.text + ".png"
+                source: getSprite(monster_1.text)
 
                 sourceSize.height: 70
                 sourceSize.width: 70
             }
             Image {
-                source: ":/../build-BattleMonster/data/images/sprite/" + monster_2.text + ".png"
+                source: getSprite(monster_2.text)
                 sourceSize.height: 70
                 sourceSize.width: 70
             }
             Image {
-                source: ":/../build-BattleMonster/data/images/sprite/" + monster_3.text + ".png"
+                source: getSprite(monster_3.text)
                 sourceSize.height: 70
                 sourceSize.width: 70
             }
@@ -80,21 +80,21 @@ Item {
                 id: monster_1
                 text: randomMonster()
                 onCheckedChanged: {
-                    choose = 1
+                    choose = text
                 }
             }
             CheckBox{
                 id: monster_2
                 text: randomMonster()
                 onCheckedChanged: {
-                    choose = 2
+                    choose = text
                 }
             }
             CheckBox{
                 id: monster_3
                 text: randomMonster()
                 onCheckedChanged: {
-                    choose = 3
+                    choose = text
                 }
             }
         }
@@ -105,7 +105,14 @@ Item {
             }
             Button{
                 text: "Ok"
-                onClicked: _data.newTrainer(content.text,sex,choose)
+                onClicked: {
+                    console.log(choose)
+                    _data.newTrainer(content.text,sex,choose)
+                    _battle.reloadPlayer()
+                    _battle.reloadPlayer()
+                    stackPages.pop()
+                    stackPages.push(battle)
+                }
             }
         }
     }

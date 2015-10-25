@@ -6,6 +6,7 @@
 #include <QVariant>
 #include "gamedata.h"
 #include "datacreate.h"
+#include "battle.h"
 
 int main(int argc, char *argv[]){
     QGuiApplication app(argc, argv);
@@ -13,9 +14,15 @@ int main(int argc, char *argv[]){
     QQmlContext *ctx = engine.rootContext();
     DataCreate dataMake;
     GameData data;
+    Battle battle;
+    //Loading game data
     data.loadMonster();
     data.loadSkill();
     data.loadTrainer();
+    battle.setPlayer(data.player());
+    battle.nextEnemy(100);
+    battle.nextFront();
+    ctx->setContextProperty("_battle",&battle);
     ctx->setContextProperty("_make",&dataMake);
     ctx->setContextProperty("_data",&data);
     QGuiApplication::setApplicationName("Battle Monster");

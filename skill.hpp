@@ -12,7 +12,7 @@ class Skill : public QObject {
 public:
     Skill();
     Skill(QJsonObject json);
-    QString toJson();
+    QJsonObject toJson();
 
     QString name() const;
     void setName(const QString &name);
