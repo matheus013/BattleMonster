@@ -25,7 +25,7 @@ class Monster : public QObject{
 
 public:
     Monster(QString name,int attack,int mAttack, int defense,int mDefense,int speed,int hp);
-
+    QString toJson();
     QString name() const;
     void setName(QString name);
     int attack() const;

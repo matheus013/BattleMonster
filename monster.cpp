@@ -1,5 +1,6 @@
 #include "monster.hpp"
-
+#include <QJsonObject>
+#include <QJsonDocument>
 Monster::Monster(QString name, int attack, int mAttack, int defense, int mDefense, int speed, int hp){
     m_attack = attack;
     m_name = name;
@@ -15,12 +16,14 @@ QString Monster::toJson(){
     QJsonObject json;
     json.insert("name",name());
     json.insert("attack",attack());
-    json.insert("mAttack",mAttack());
-    json.insert("defense",mDefense());
-
-            //    if(json.value("type") == m_type)
-            //        qDebug() << Q_FUNC_INFO << "enum: ok";
-            return QJsonDocument(json).toJson();
+    json.insert("mAttack",m_mAttack);
+    json.insert("defense",defense());
+    json.insert("mDefense",m_mDefense);
+    json.insert("speed",speed());
+    json.insert("hp",hp());
+    //    if(json.value("type") == m_type)
+    //        qDebug() << Q_FUNC_INFO << "enum: ok";
+    return QJsonDocument(json).toJson();
 
 }
 

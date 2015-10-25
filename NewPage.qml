@@ -2,7 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 ColumnLayout {
-        anchors.horizontalCenter: parent.horizontalCenter
+    anchors.horizontalCenter: parent.horizontalCenter
     RowLayout{
         Text {
             id: name

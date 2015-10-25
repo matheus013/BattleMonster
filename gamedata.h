@@ -34,47 +34,13 @@ public:
     void loadTrainer(QString dir = "data/player");
     void saveTrainer(QString dir = "data/player");
 
-    QList<Skill *> dataSkill() const
-    {
-        return m_dataSkill;
-    }
-    QList<Monster *> dataMonster() const
-    {
-        return m_dataMonster;
-    }
+    QList<Skill *> dataSkill() const;
+    QList<Monster *> dataMonster() const;
+    Trainer * player() const;
 
-    Trainer * player() const
-    {
-        return m_player;
-    }
-
-public slots:
-    void setDataSkill(QList<Skill *> dataSkill)
-    {
-        if (m_dataSkill == dataSkill)
-            return;
-
-        m_dataSkill = dataSkill;
-        emit dataSkillChanged(dataSkill);
-    }
-
-    void setDataMonster(QList<Monster *> dataMonster)
-    {
-        if (m_dataMonster == dataMonster)
-            return;
-
-        m_dataMonster = dataMonster;
-        emit dataMonsterChanged(dataMonster);
-    }
-
-    void setPlayer(Trainer * player)
-    {
-        if (m_player == player)
-            return;
-
-        m_player = player;
-        emit playerChanged(player);
-    }
+    void setDataSkill(QList<Skill *> dataSkill);
+    void setDataMonster(QList<Monster *> dataMonster);
+    void setPlayer(Trainer * player);
 
 signals:
     void dataSkillChanged(QList<Skill *> dataSkill);
