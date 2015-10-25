@@ -12,6 +12,10 @@ Monster::Monster(QString name, int attack, int mAttack, int defense, int mDefens
 
 }
 
+void Monster::levelUp(){
+    m_level++;
+}
+
 QString Monster::toJson(){
     QJsonObject json;
     json.insert("name",name());
@@ -40,21 +44,27 @@ void Monster::setName(QString name){
 }
 
 int Monster::attack() const{
-    return m_attack;
+    return m_attack*(m_level/100);
 }
 
-
+int Monster::mAttack() const{
+    return m_mAttack*(m_level/100);
+}
 
 int Monster::defense() const{
-    return m_defense;
+    return m_defense*(m_level/100);
+}
+
+int Monster::mDefense() const{
+    return m_mDefense*(m_level/100);
 }
 
 int Monster::speed() const{
-    return m_speed;
+    return m_speed*(m_level/100);
 }
 
 int Monster::hp() const{
-    return m_hp;
+    return m_hp*(m_level/100);
 }
 
 void Monster::setAttack(int attack){
@@ -104,4 +114,29 @@ void Monster::setHp(int hp){
     m_hp = hp;
     emit hpChanged(hp);
 }
+
+int Monster::level() const
+{
+    return m_level;
+}
+
+void Monster::setLevel(int level)
+{
+    if (m_level == level)
+        return;
+
+    m_level = level;
+    emit levelChanged(level);
+}
+
+//void Monster::setSkills(QList<Skill> skills){
+//    if (m_skills == skills)
+//        return;
+//    m_skills = skills;
+//    emit skillsChanged(skills);
+//}
+
+//QList<Skill> Monster::skills() const{
+//    return m_skills;
+//}
 

@@ -7,7 +7,7 @@ class DataCreate : public QObject {
     GameData data;
 public:
     DataCreate();
-    void buildMonster();
+    Q_INVOKABLE void buildMonster();
     int random(int a = 300,int b = 400);
 
 signals:

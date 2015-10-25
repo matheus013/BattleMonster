@@ -3,6 +3,11 @@ import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.1
 ColumnLayout {
     anchors.horizontalCenter: parent.horizontalCenter
+    property int choose: 0
+    function randomMonster(){
+        return Math.floor(Math.random() * 99);
+    }
+
     RowLayout{
         Text {
             id: name
@@ -35,15 +40,24 @@ ColumnLayout {
     RowLayout{
         CheckBox{
             id: monster_1
-            text: "Op 1"
+            text: randomMonster()
+            onCheckedChanged: {
+                choose = 1
+            }
         }
         CheckBox{
             id: monster_2
-            text: "Op 1"
+            text: randomMonster()
+            onCheckedChanged: {
+                choose = 2
+            }
         }
         CheckBox{
             id: monster_3
-            text: "Op 1"
+            text: randomMonster()
+            onCheckedChanged: {
+                choose = 3
+            }
         }
     }
     RowLayout{
@@ -53,6 +67,7 @@ ColumnLayout {
         }
         Button{
             text: "Ok"
+            onClicked: _data.newTrainer(content.text)
         }
     }
 }

@@ -14,9 +14,7 @@ class GameData : public QObject{
     Q_PROPERTY(Trainer * player READ player WRITE setPlayer NOTIFY playerChanged)
 
     QList<Monster *> m_dataMonster;
-
     QList<Skill *> m_dataSkill;
-
     Trainer * m_player;
 
 public:
@@ -24,6 +22,7 @@ public:
 
     void newSkill(QString name, int power, int accuracy, Type type);
     void newMonster(QString name,int attack,int mAttack, int defense,int mDefense,int speed,int hp);
+    Q_INVOKABLE void newTrainer(QString name,QString sex,int monsterId);
 
     void loadSkill(QString path = "data/json/skill.json");
     void saveSkill(QString path = "data/json/skill.json");

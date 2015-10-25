@@ -19,6 +19,10 @@ void GameData::newMonster(QString name, int attack, int mAttack, int defense, in
     m_dataMonster.append(monster);
 }
 
+void GameData::newTrainer(QString name, QString sex, int monsterId){
+
+}
+
 void GameData::loadSkill(QString path){
     QFile in(path);
     QJsonDocument doc;
@@ -26,10 +30,10 @@ void GameData::loadSkill(QString path){
         doc = QJsonDocument::fromJson(in.readAll());
         QJsonArray json = doc.array();
         for (int var = 0; var < json.size(); ++var){
-//            if(QJsonDocument(json.at(var)).isObject()){
-//                Skill aux(QJsonDocument(json.at(var)).object());
-//                skillData.insert(QJsonDocument(json.at(var)).object().value("name"),aux);
-//            }
+            //            if(QJsonDocument(json.at(var)).isObject()){
+            //                Skill aux(QJsonDocument(json.at(var)).object());
+            //                skillData.insert(QJsonDocument(json.at(var)).object().value("name"),aux);
+            //            }
         }
     }
 }

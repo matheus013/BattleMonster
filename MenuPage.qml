@@ -3,14 +3,6 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.4
 
 Item {
-    Text {
-        anchors.horizontalCenter: parent.horizontalCenter
-        id: name
-        text: qsTr(ui.title)
-        font{
-            pixelSize: 30
-        }
-    }
     ColumnLayout{
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
@@ -19,10 +11,12 @@ Item {
             onClicked: stackPages.push(newGame)
         }
         Button{
-            text: "Load Game"
+            text: "Battle"
+            onClicked: stackPages.push(battle)
         }
         Button{
             text: "My Page"
+            onClicked: myPage.visible = !myPage.visible
         }
         Button{
             text: "Info"
@@ -32,6 +26,10 @@ Item {
     Component{
         id: newGame
         NewPage{}
+    }
+    Component{
+        id: battle
+        BattlePage{}
     }
 }
 

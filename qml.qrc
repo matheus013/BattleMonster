@@ -3,5 +3,7 @@
         <file>main.qml</file>
         <file>MenuPage.qml</file>
         <file>NewPage.qml</file>
+        <file>BattlePage.qml</file>
+        <file>MyPage.qml</file>
     </qresource>
 </RCC>
