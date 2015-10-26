@@ -35,7 +35,7 @@ QString Trainer::name() const{
     return m_name;
 }
 
-QList<Monster*> Trainer::team() const{
+QList<QObject *> Trainer::team() const{
     return m_team;
 }
 
@@ -57,7 +57,7 @@ void Trainer::setName(QString name){
     emit nameChanged(name);
 }
 
-void Trainer::setTeam(QList<Monster *> team){
+void Trainer::setTeam(QList<QObject *> team){
     if (m_team == team)
         return;
     m_team = team;
@@ -69,5 +69,9 @@ void Trainer::setBox(QList<Monster *> box){
         return;
     m_box = box;
     emit boxChanged(box);
+}
+
+void Trainer::addMonster(Monster *curr){
+        m_team.append(curr);
 }
 

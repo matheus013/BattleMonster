@@ -7,11 +7,11 @@ class Trainer : public QObject{
     Q_OBJECT
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QString sex READ sex WRITE setSex NOTIFY sexChanged)
-    Q_PROPERTY(QList<Monster*> team READ team WRITE setTeam NOTIFY teamChanged)
+    Q_PROPERTY(QList<QObject*> team READ team WRITE setTeam NOTIFY teamChanged)
     Q_PROPERTY(QList<Monster*> box READ box WRITE setBox NOTIFY boxChanged)
     QString m_sex;
     QString m_name;
-    QList<Monster*> m_team;
+    QList<QObject*> m_team;
     QList<Monster*> m_box;
 
 public:
@@ -21,17 +21,18 @@ public:
     QString sex() const;
     QString name() const;
 
-    QList<Monster*> team() const;
+    QList<QObject*> team() const;
     QList<Monster*> box() const;
     void setSex(QString sex);
     void setName(QString name);
-    void setTeam(QList<Monster*> team);
+    void setTeam(QList<QObject *> team);
     void setBox(QList<Monster*> box);
+    void addMonster(Monster* curr);
 
 signals:
     void sexChanged(QString sex);
     void nameChanged(QString name);
-    void teamChanged(QList<Monster*> team);
+    void teamChanged(QList<QObject*> team);
     void boxChanged(QList<Monster*> box);
 };
 

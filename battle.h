@@ -38,7 +38,7 @@ signals:
     void playerHpChanged(int playerHp);
     void enemyHpChanged(int enemyHp);
     void playerChanged(Trainer * player);
-    void enemyChanged(Monster * enemy);
+    void enemyChanged(QObject * enemy);
 
 
     void frontChanged(Monster * front);

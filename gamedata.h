@@ -31,7 +31,7 @@ public:
     void saveTrainer(QString path = "/home/matheus/build-BattleMonster/data/player/player.json");
 
     Monster * atMonster(int id) const;
-
+    Q_INVOKABLE void addMonster(int id,int level = 5);
     QList<Skill *> dataSkill() const;
     QList<Monster *> dataMonster() const;
     Trainer * player() const;

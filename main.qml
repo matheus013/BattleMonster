@@ -13,6 +13,7 @@ Window {
     function cm(value){
         return value*10*Screen.pixelDensity
     }
+
     Image {
         id: background
         anchors.fill: parent
@@ -26,14 +27,12 @@ Window {
     height: Screen.height
     ColumnLayout{
         CheckBox{
+            id:adminCheckBox
             text: "Admin Mode"
-            onCheckedChanged: {
-                admin.visible = checked
-            }
         }
         Rectangle{
             id: admin
-            visible: false
+            visible: adminCheckBox.checked
             height: ui.height*0.25
             width: ui.width*0.15
             color: "black"
@@ -45,6 +44,18 @@ Window {
                 Button{
                     text: "Next Monster"
                     onClicked: _battle.nextEnemy(5)
+                }
+                RowLayout{
+                    Button{
+                        text: "Add Monster"
+                        onClicked:{
+                            _data.addMonster(idMonster.text)
+                            _battle.reloadPlayer()
+                        }
+                    }
+                    TextField{
+                        id: idMonster
+                    }
                 }
             }
         }

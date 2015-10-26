@@ -85,9 +85,9 @@ void GameData::saveTrainer(QString path){
     json.insert("sex",m_player->sex());
     for (int var = 0; var < m_player->team().size(); ++var) {
         QJsonObject aux;
-        //        qDebug() << Q_FUNC_INFO << m_player->team().at(var)->property("name").toInt();
-        aux.insert("id",m_player->team().at(var)->property("name").toInt());
-        aux.insert("level",m_player->team().at(var)->level());
+        Monster *monster= (Monster *)m_player->team().at(var);
+        aux.insert("id",monster->property("name").toInt());
+        aux.insert("level",monster->level());
         list.append(aux);
     }
     json.insert("monsterList",list);
@@ -100,6 +100,15 @@ void GameData::saveTrainer(QString path){
 Monster *GameData::atMonster(int id) const{
     //    qDebug() << Q_FUNC_INFO << id;
     return dataMonster().at(id);
+}
+
+void GameData::addMonster(int id, int level){
+    if(id >= 100)
+        return;
+    Monster * curr = atMonster(id);
+    curr->setLevel(level);
+    player()->addMonster(curr);
+    saveTrainer();
 }
 
 QList<Skill *> GameData::dataSkill() const{

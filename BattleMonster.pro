@@ -29,5 +29,8 @@ HEADERS += \
     trainer.h \
     battle.h
 
+OTHER_FILES += ../build-BattleMonster/data/player/player.json \
+               ../build-BattleMonster/data/json/monster.json
+
 DISTFILES +=
 

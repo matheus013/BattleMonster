@@ -2,6 +2,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QDebug>
+
 Monster::Monster(QString name, int attack, int mAttack, int defense, int mDefense, int speed, int hp){
     m_attack = attack;
     m_name = name;
@@ -10,11 +11,10 @@ Monster::Monster(QString name, int attack, int mAttack, int defense, int mDefens
     m_mDefense = mDefense;
     m_speed = speed;
     m_hp = hp;
-
+    m_level = 1;
 }
 
 Monster::Monster(QJsonObject json){
-    //qDebug() << Q_FUNC_INFO << json;
     m_name = json.value("name").toString();
     m_attack = json.value("attack").toInt();
     m_mAttack = json.value("mAttack").toInt();
@@ -22,7 +22,6 @@ Monster::Monster(QJsonObject json){
     m_mDefense = json.value("mDefense").toInt();
     m_speed = json.value("speed").toInt();
     m_hp = json.value("hp").toInt();
-
 }
 
 void Monster::levelUp(){
@@ -76,8 +75,8 @@ int Monster::speed() const{
     return m_speed*(m_level/100);
 }
 
-int Monster::hp() const{
-    return m_hp*(m_level/100);
+double Monster::hp() const{
+    return m_hp*(m_level*(0.01));
 }
 
 void Monster::setAttack(int attack){
@@ -140,5 +139,19 @@ void Monster::setLevel(int level)
 
     m_level = level;
     emit levelChanged(level);
+}
+
+QList<QObject *> Monster::skill() const
+{
+    return m_skill;
+}
+
+void Monster::setSkill(QList<QObject *> skill)
+{
+    if (m_skill == skill)
+        return;
+
+    m_skill = skill;
+    emit skillChanged(skill);
 }
 

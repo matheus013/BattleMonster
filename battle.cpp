@@ -51,15 +51,17 @@ void Battle::setEnemy(Monster *enemy){
 void Battle::nextEnemy(int level){
     GameData data;
     data.loadMonster();
-    setEnemy(data.atMonster(qrand() % (99 + 1)));
+    int id = qrand() % (98 + 1);
+    qDebug() << Q_FUNC_INFO << id;
+    setEnemy(data.atMonster(id));
     m_enemy->setLevel(level);
     setEnemyHp(m_enemy->hp());
 }
 
 void Battle::nextFront(){
-    setFront(player()->team().front());
+    Monster *m = (Monster *)player()->team().front();
+    setFront(m);
     setPlayerHp(front()->hp());
-    qDebug() << Q_FUNC_INFO << front()->hp() << '\n' << front()->level();
 }
 
 Monster *Battle::front() const{
